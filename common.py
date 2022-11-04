@@ -6,11 +6,11 @@ import numpy as np
 
 
 def get_image_sift_feature(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    assert img.ndim == 2, "Image should be gray scale"
     # create SIFT object
-    sift = cv2.xfeatures2d.SIFT_create()
+    sift = cv2.SIFT_create()
     # detect SIFT features in both images
-    keypoints, descriptors = sift.detectAndCompute(gray, None)
+    keypoints, descriptors = sift.detectAndCompute(img, None)
     return keypoints, descriptors
 
 # Get the matched feature between the two image
