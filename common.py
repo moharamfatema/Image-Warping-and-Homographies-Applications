@@ -30,9 +30,9 @@ def get_matches(des1, des2, ratio=0.5, knn_num=2):
 # 1.2 Compute the Homography Parameters
 # The point that match the 2 image
 
-def get_matched_pt(kpt, matched_list, num_pts=50):
+def get_matched_pt(kpt, matched_list, num_pts=50, query=True):
     pts = np.float32(
-        [kpt[m[0].queryIdx].pt for m in matched_list[:num_pts]]).reshape(-1, 1, 2)
+        [kpt[m[0].queryIdx].pt if query else kpt[m[0].trainIdx].pt for m in matched_list[:num_pts]]).reshape(-1, 1, 2)
     return pts
 
 # Get the homograph matrix using the SVD
