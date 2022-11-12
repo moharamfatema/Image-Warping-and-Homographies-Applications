@@ -20,10 +20,10 @@ def cover_to_book_homography(kp_cover, des_cover, book_gray)->np.ndarray:
     matches = get_matches(des_cover, des_book)
     # Get the matched keypoints
     pts_cover = get_matched_pt(kp_cover, matches)
-    pts_book = get_matched_pt(kp_book, matches, query=False)
+    pts_book = get_matched_pt(kp_book, matches, points_type=1)
 
     # Find the homography matrix
-    mat = get_homograph_mat(pts_cover, pts_book)
+    mat = get_homograph_mat(pts_book, pts_cover)
     return mat
 
 def trailer_dimensions(trailer_shape,cover_shape)->np.ndarray:
@@ -38,14 +38,14 @@ def trailer_dimensions(trailer_shape,cover_shape)->np.ndarray:
             [cover_w-1, cover_h-1],
             [cover_w-1, 0]
         ],
-        dtype=np.float32).reshape(-1,1,2)
+        dtype=np.float32)
 
     # trailer dimensions wrt cover
     # Calculate dimensions
-    x_min = int(np.min(corners[:,0,0]))
-    x_max = int(np.max(corners[:,0,0]))
-    y_min = int(np.min(corners[:,0,1]))
-    y_max = int(np.max(corners[:,0,1]))
+    x_min = int(np.min(corners[:,0]))
+    x_max = int(np.max(corners[:,0]))
+    y_min = int(np.min(corners[:,1]))
+    y_max = int(np.max(corners[:,1]))
 
     # Calculate the dimensions of the new image
     new_w = min(trailer_w,int(x_max - x_min))
@@ -70,12 +70,13 @@ def prep_trailer_frame(trailer, homography, trailer_corners, cover_shape, book_s
 
     # cropped_trailer = trailer[x_start:x_end, y_start:y_end]
     cropped_trailer = cv2.resize(trailer, (cover_h, cover_w))
-    cropped_trailer = cv2.warpPerspective(cropped_trailer, homography, (book_h, book_w))
+    cropped_trailer = wrap_prespective(cropped_trailer,homography,(book_h,book_w))
     return cropped_trailer
 
 def overlay(cropped_trailer,book,mask, homography)->np.ndarray:
     # Create a mask of cover image and create its inverse mask also
-    mask = cv2.warpPerspective(mask, homography,(book.shape[1], book.shape[0]))
+    mask_3d = np.dstack([mask, mask, mask])
+    mask = wrap_prespective(mask_3d,homography,(book.shape[1],book.shape[0]))[:,:,0]
     mask_inv = cv2.bitwise_not(mask)
     # Black-out the area of cover in book image
     book_bg = cv2.bitwise_and(book, book, mask=mask_inv)
