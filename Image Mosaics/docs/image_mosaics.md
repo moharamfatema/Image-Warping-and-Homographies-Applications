@@ -135,4 +135,20 @@ $$
 # Examples
 ## Example 1
 ### Inputs:
+![example1-1](../img/image1.jpg)
+![example1-2](../img/image2.jpg)
 ### Output:
+![example1 output](ex1output.png)
+## Example 2
+### Inputs:
+![example2-1](../img/example2-1.png)
+![example2-2](../img/example2-2.png)
+### Output:
+![example2 output](ex2output.png)
+## Example 3
+### Inputs:
+![example3-1](../img/shanghai-21.jpg)
+![example3-2](../img/shanghai-22.jpg)
+![example3-3](../img/shanghai-23.jpg)
+### Output:
+![example3 output](ex3output.png)
