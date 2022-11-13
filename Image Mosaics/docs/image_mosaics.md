@@ -147,8 +147,8 @@ $$
 ![example2 output](ex2output.png)
 ## Example 3
 ### Inputs:
-![example3-1](../img/shanghai-21.jpg)
-![example3-2](../img/shanghai-22.jpg)
-![example3-3](../img/shanghai-23.jpg)
+![example3-1](../img/shanghai-21.png)
+![example3-2](../img/shanghai-22.png)
+![example3-3](../img/shanghai-23.png)
 ### Output:
 ![example3 output](ex3output.png)
