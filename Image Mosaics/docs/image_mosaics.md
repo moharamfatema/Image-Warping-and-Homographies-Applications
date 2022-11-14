@@ -81,6 +81,8 @@ A SIFT descriptor of a local region (keypoint) is a 3-D spatial histogram of the
 
 ##### $P^{`}$ = $H$ . $P$
 
+<br>
+
 $$ \begin{bmatrix}
 
 x_{n}\\
@@ -113,7 +115,8 @@ y_{}\\
 \end{bmatrix}
 $$
 
-  
+<br>
+
 
 ### Solving for H using DLT
 
