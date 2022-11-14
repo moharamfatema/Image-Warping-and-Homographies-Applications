@@ -41,7 +41,7 @@ def get_matches(des1, des2, ratio=0.75):
 def get_matched_pt(kpt, matched_list, points_type = 0, num_pts=50):
     # TODO: check if the function returning the desirable array shape
     """Function to extract the (x, y) points from brute-force knn matcher points
-    
+
     Args:
         kpt (cv2.KeyPoint array): of shape (n, 1)
         matched_list (2D cv2.DMatch array): of shape (n, 1, 1) represting n set of x, y points
@@ -79,15 +79,15 @@ def transform_with_homography(h_mat, points_array):
     epsilon = 1e-7 # very small value to use it during normalization to avoid division by zero
     transformed_points = transformed_points / (transformed_points[2,:].reshape(1,-1) + epsilon)
     transformed_points = transformed_points[0:2,:].T
-    
+
     return transformed_points
-    
+
 def compute_outliers(h_mat, points_img_a, points_img_b, threshold):
     outliers_count = 0
 
     # transform the match point in image B to image A using the homography
     points_img_b_hat = transform_with_homography(h_mat, points_img_b)
-    
+
     # let x, y be coordinate representation of points in image A
     # let x_hat, y_hat be the coordinate representation of transformed points of image B with respect to image A
     x = points_img_a[:, 0]
@@ -105,7 +105,7 @@ def compute_outliers(h_mat, points_img_a, points_img_b, threshold):
 def compute_homography_ransac(pts_dst, pts_src, CONFIDENCE_THRESH = 65, OUTLIER_DIS_THRESH = 3):
     num_all_matches =  pts_dst.shape[0]
     min_iterations = int(np.log(1.0 - SUCCESS_PROB)/np.log(1 - 0.5**SAMPLE_SIZE))
-    
+
     # Let the initial error be large i.e consider all matched points as outliers
     lowest_outliers_count = num_all_matches
     best_h_mat = None
@@ -117,7 +117,7 @@ def compute_homography_ransac(pts_dst, pts_src, CONFIDENCE_THRESH = 65, OUTLIER_
         if outliers_count < lowest_outliers_count:
             best_h_mat = h_mat
             lowest_outliers_count = outliers_count
-            
+
     best_confidence_obtained = int(100 - (100 * lowest_outliers_count / num_all_matches))
     if best_confidence_obtained < CONFIDENCE_THRESH:
         raise Exception(f'The obtained confidence ratio was {best_confidence_obtained}% which is not higher than {CONFIDENCE_THRESH}%')
@@ -156,8 +156,7 @@ def wrap_prespective(img, h, dim):
                     if not point_is_out_of_range((new_x, new_y), dim):
                         target_img[new_y, new_x, :] += img[y, x, :]
                         count_mat[new_y, new_x] += 1
-            
-    
+
     h_inv = np.linalg.inv(h)
     for y in range(len(target_img)):
         for x in range(len(target_img[y])):
@@ -179,9 +178,11 @@ def wrap_prespective(img, h, dim):
                 
                 target_img[y, x] += weighted_intenisty_sum / (weights_sum if weights_sum != 0 else 1)
 
+
             else:
                 target_img[y, x, 0] = int(np.round(target_img[y, x, 0] / count_mat[y, x]))
                 target_img[y, x, 1] = int(np.round(target_img[y, x, 1] / count_mat[y, x]))
                 target_img[y, x, 2] = int(np.round(target_img[y, x, 2] / count_mat[y, x]))
 
     return target_img.astype(np.uint8)
+
