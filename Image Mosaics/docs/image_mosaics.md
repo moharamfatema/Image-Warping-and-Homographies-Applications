@@ -4,8 +4,13 @@
 ## 1 - Getting Correspondences
 
 #### Use SIFT descriptor
+The scale-invariant feature transform (SIFT) is a computer vision algorithm to detect, describe, and match local features in images, invented by David Lowe in 1999. Applications include object recognition, robotic mapping and navigation, image stitching, 3D modeling, gesture recognition, video tracking, individual identification of wildlife and match moving.
+-----
+#### Steps
 
 - Scale-space peak selection: Potential location for finding features.
+<br>
+Difference of Gaussians (DoG) approximate Laplacian of Gaussian (LoG) which is a well known blob detector (LoG filters give high response to regions corresponding to blobs). You need to apply the filters in the scale space due to not knowing the exact scale of each blob in the image. In this way, you get responses for blobs in different scales.
 
 ---------
 
@@ -16,6 +21,8 @@
   
 
 - Keypoint Localization: Accurately locating the feature keypoints.
+<br>
+After scale space extrema are detected (their location being shown in the uppermost image) the SIFT algorithm discards low-contrast keypoints (remaining points are shown in the middle image) and then filters out those located on edges. Resulting set of keypoints is shown on last image.
 
 ---------
 
@@ -26,13 +33,18 @@
   
 
 - Orientation Assignment: Assigning orientation to keypoints.
+<br>
+An orientation histogram is formed from the gradient orientations of sample points within a region around the keypoint. The orientation histogram has 36 bins covering the 360 degree range of orientations.
+
+![Orientation Assignment](img-o.jpg)
 
 ---------
 
   
 
 - Keypoint descriptor: Describing the keypoints as a high dimensional vector.
-
+<br>
+A SIFT descriptor of a local region (keypoint) is a 3-D spatial histogram of the image gradients. The gradient at each pixel is regarded as a sample of a three-dimensional elementary feature vector, formed by the pixel location and the gradient orientation.
 ---------
 
   
@@ -69,7 +81,7 @@
 
 ##### $P^{`}$ = $H$ . $P$
 
-$$  \begin{bmatrix}
+$$ \begin{bmatrix}
 
 x_{n}\\
 
@@ -98,9 +110,7 @@ x_{}\\
 y_{}\\
 
 1
-
 \end{bmatrix}
-
 $$
 
   
@@ -116,6 +126,9 @@ $$
 #### 4 - Store singular vector of the smallest singular value $h_{i} = v_{\hat{i}}$
 
 #### 5 - Reshape to get $H$
+
+![Homography Matrix](homography.jpg)
+
 
 ## 3 - Stitching Images
     In this step we are using the homography matrix to do the perspective
