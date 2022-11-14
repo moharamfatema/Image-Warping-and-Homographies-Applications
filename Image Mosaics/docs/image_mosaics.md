@@ -84,33 +84,19 @@ A SIFT descriptor of a local region (keypoint) is a 3-D spatial histogram of the
 <br>
 
 $$ \begin{bmatrix}
-
 x_{n}\\
-
 y_{n}\\
-
 1
-
 \end{bmatrix}
-
 = \alpha
-
 \begin{bmatrix}
-
 h_{1} & h_{2} & h_{3} \\
-
 h_{4} & h_{5} & h_{6}\\
-
 h_{7} & h_{8} & h_{9}
-
 \end{bmatrix}
-
 \begin{bmatrix}
-
 x_{}\\
-
 y_{}\\
-
 1
 \end{bmatrix}
 $$
