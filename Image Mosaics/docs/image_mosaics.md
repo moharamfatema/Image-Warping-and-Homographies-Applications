@@ -17,7 +17,7 @@ Difference of Gaussians (DoG) approximate Laplacian of Gaussian (LoG) which is a
 
 <br>
   
-![Scale-space peak](img1.jpg)
+<img src="img1.jpg"  width="800" height="300">
 
 ---------
 
@@ -27,7 +27,7 @@ After scale space extrema are detected (their location being shown in the upperm
 
 <br>
 
-![Keypoint Localization](img2.png)
+<img src="img2.png"  width="800" height="300">
 
 ---------
 
@@ -37,7 +37,7 @@ An orientation histogram is formed from the gradient orientations of sample poin
 
 <br>
 
-![Orientation Assignment](img-o.jpg)
+<img src="img-o.jpg"  width="800" height="300">
 
 
 ---------
@@ -50,7 +50,7 @@ A SIFT descriptor of a local region (keypoint) is a 3-D spatial histogram of the
   
 <br>
 
-![Keypoint descriptor](img3.png)
+<img src="img3.png"  width="800" height="300">
 
 --------   
 
@@ -59,7 +59,7 @@ A SIFT descriptor of a local region (keypoint) is a 3-D spatial histogram of the
 <br>
   
 
-![Matching](img4.png)
+<img src="img4.png"  width="800" height="300">
 
 ------- 
 
@@ -127,7 +127,7 @@ $$
 
 #### 5 - Reshape to get $H$
 
-![Homography Matrix](homography.jpg)
+<img src="homography.jpg"  width="800" height="300">
 
 
 ## 3 - Stitching Images
